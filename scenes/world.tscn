@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://2vbfsa1kwwxp"]
+[gd_scene load_steps=7 format=3 uid="uid://2vbfsa1kwwxp"]
 
 [ext_resource type="Material" uid="uid://38hulhn7ekrs" path="res://materials/prototypewhite.tres" id="1_qpq31"]
 [ext_resource type="Texture2D" uid="uid://c5eaqnio23fpb" path="res://sprites/kloofendal_48d_partly_cloudy_puresky.jpg" id="2_13lrn"]
-[ext_resource type="Script" path="res://scripts/playermovement.gd" id="3_47p44"]
+[ext_resource type="PackedScene" uid="uid://bljf55ocwg7w" path="res://prefabs/player.tscn" id="3_1g3ql"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tpnhe"]
 panorama = ExtResource("2_13lrn")
@@ -15,10 +15,6 @@ background_mode = 2
 sky = SubResource("Sky_ebrbe")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_nxrma"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nqxs0"]
 
 [node name="world" type="Node3D"]
 
@@ -39,15 +35,4 @@ environment = SubResource("Environment_s622k")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-script = ExtResource("3_47p44")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
-mesh = SubResource("CapsuleMesh_nxrma")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-shape = SubResource("CapsuleShape3D_nqxs0")
-
-[node name="head" type="Node3D" parent="CharacterBody3D"]
-
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/head"]
+[node name="CharacterBody3D" parent="." instance=ExtResource("3_1g3ql")]
